@@ -107,6 +107,7 @@ defmodule Rumbl.Multimedia do
   def list_user_videos(%Accounts.User{} = user) do
     Video 
     |> user_videos_query(user)
+    |> preload(:category)
     |> Repo.all
   end
 
