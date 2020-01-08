@@ -3,7 +3,7 @@
 <table>
   <thead>
     <tr>
-      <th>Url</th>
+      <th>Title</th>
       <th></th>
       <th></th>
       <th></th>
@@ -12,7 +12,7 @@
   <tbody>
 <%= for video <- @videos do %>
     <tr>
-      <td><%= video.url %></td>
+      <td><%= video.title %></td>
       <td>
         <span><%= link "Edit", to: Routes.video_path(@conn, :edit, video) %></span>
       </td>
