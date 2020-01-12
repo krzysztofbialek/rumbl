@@ -1,8 +1,9 @@
 defmodule RumblWeb.VideoChannel do
   use RumblWeb, :channel
+  alias Rumbl.{Accounts, Multimedia}
 
   def join("videos:" <> video_id, _params, socket) do
-    {:ok, socket}
+    {:ok, assign(socket, :video_id, String.to_integer(video_id))}
   end
 
   def handle_in(event, params, socket) do
@@ -11,7 +12,7 @@ defmodule RumblWeb.VideoChannel do
   end
 
   def handle_in("new_annotation", params, user, socket) do
-    case Multimedia.annotate_video(user, socket.assign.video_id, params) do
+    case Multimedia.annotate_video(user, socket.assigns.video_id, params) do
       {:ok, annotation} ->
         broadcast!(socket, "new_annotation", %{
           id: annotation.id,

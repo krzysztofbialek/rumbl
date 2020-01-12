@@ -105,8 +105,8 @@ defmodule Rumbl.Multimedia do
     Video.changeset(video, %{})
   end
 
-  def annotate_video(%{Accounts.User{id: user_id})}, video_id, attrs) do
-    %Annotation(video_id: video_id, user_id: user_id)
+  def annotate_video(%Accounts.User{id: user_id}, video_id, attrs) do
+    %Annotation{video_id: video_id, user_id: user_id}
     |> Annotation.changeset(attrs)
     |> Repo.insert()
   end
